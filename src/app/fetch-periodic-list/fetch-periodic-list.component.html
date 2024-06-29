@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+            <th class="header">ID</th>
+            <th class="header">Name</th>
+            <th class="header">Phone</th>
+            <th class="header">Address</th>
+            <th class="header">Zip Code</th>
+            <th class="header">Generator</th>
+            <th class="header">Consumer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let address of fetchedAddressBooks.addressBooks">
+            <td>{{address.id}}</td>
+            <td>{{address.name}}</td>
+            <td>{{address.phone}}</td>
+            <td>{{address.address}}</td>
+            <td>{{address.zipCode}}</td>
+            <td>{{address.generator}}</td>
+            <td>{{address.consumer}}</td>
+        </tr>
+    </tbody>
+</table>
+
+

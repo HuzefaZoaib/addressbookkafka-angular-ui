@@ -1,0 +1,43 @@
+<h2>System Check</h2>
+<br/>
+<br/>
+<div style="display: flex; align-items: center; justify-content: center;">
+<table>
+    <tbody>
+    <tr>
+        <td>Shall I bring-up the system</td>
+        <td (click)="startKafkaInstance()" [ngClass]="{btn:!state.isKafkaInstanceTriggered}">Yes! Please</td>
+    </tr>
+    <tr *ngIf="state.isKafkaInstanceTriggered">
+        <td>Kafka Instance is loading</td>
+        <td>
+            <span>It will take a minute</span>
+            <app-progress-bar [expectedTimeSec]="state.expectedTimeForSystemUpSec" [callback]="startKafkaInstanceCompleted" />
+        </td>
+    </tr>
+    <tr *ngIf="state.isKafkaInstanceStarted">
+        <td>Kafka Instance health</td>
+        <td *ngIf="state.isKafkaInstanceHealthy">
+            <span style="display: block;">Good</span>
+            <a href="{{KAFKA_INSTANCE_MONITORING_URL}}" target="_blank">Kafka Instance</a>
+        </td>
+        <td *ngIf="!state.isKafkaInstanceHealthy">Something Wrong</td>
+    </tr>
+    <tr *ngIf="state.isKafkaInstanceHealthy">
+        <td>Shall the data to be loaded into Kafka instance?</td>
+        <td (click)="triggerDataIntoKafka()" [ngClass]="{ btn:!state.isDataTriggeredToKafkaInstance }">Yes! Please, Go a head</td>
+    </tr>
+    <tr *ngIf="state.isDataTriggeredToKafkaInstance">
+        <td>Kafka Data Loading Status, it will take approx 3min</td>
+        <td>
+            <span>It will take a minute</span>
+            <app-progress-bar [expectedTimeSec]="state.expectedTimeForDataLoadToKakfaSec" [callback]="triggerDataIntoKafkaComplted"/>
+        </td>
+    </tr>
+    <tr *ngIf="state.isDataTriggeredToKafkaCompleted">
+        <td>All data loaded, Please navigate to view data</td>
+        <td (click)="navigateToList()" [ngClass]="{ btn:state.isDataTriggeredToKafkaCompleted }">Next</td>
+    </tr>
+    </tbody>
+</table>
+</div>
